@@ -1,39 +1,49 @@
 
+import {focusHandler,setTry} from "./handlers.js"
+
 let tryCount = 1
+let gameWord =await getWord()
 
+function startUp() {
+    setFocus()
+    setFocus(1)
+    setTry(tryCount)
+}
 function setFocus() {
-
+    
     let inputs = document.querySelectorAll(".wordInput")
-
+    
     inputs.forEach(input => {
-        if (!input.classList.contains("letter5")) {
+        
 
-            input.addEventListener("keyup", () => {
-                input.nextElementSibling.focus()
-            })
-        }
+        input.addEventListener("keydown", focusHandler)
+        
         // next.focus()
     })
 
 }
-function setTry(tryCount) {
-    let nextRow = document.querySelector(`.coluna${tryCount}`)
 
-    //enable next try
-    Array.from(nextRow.children).map(child => {
-        child.disabled = false
-    })
-
-    if (tryCount != 1) {
-
-        let currentRow = document.querySelector(`.coluna${tryCount - 1}`)
-        //disable current finished try
-        Array.from(currentRow.children).map(child => {
-            child.disabled = true
-        })
-    }
-
+async function getWord() {
+   let word = await fetch("https://random-word-api.herokuapp.com/word?length=5").then(word => word.json())
+    
+    return word[0]
+}
+function checkTry(){
+    let row =Array.from(document.querySelector(`.column${tryCount}`).children )
+    let word=""
+ 
+    row.map(input=>{
+       
+        word+=input.value
+   })
+   tryCount++
+   setTry(tryCount)
+   console.log(gameWord)
 }
 
-setFocus()
-setTry(1)
+
+
+
+startUp()
+document.getElementById("button").addEventListener("click",checkTry,false)
+        

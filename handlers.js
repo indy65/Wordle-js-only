@@ -1,18 +1,17 @@
 export function focusHandler(e) {
-    if (e.keyCode >= 65 && e.keyCode <= 90) {
-        e.target.value = e.key
-        e.target.nextElementSibling.focus()
-        e.preventDefault()
-
-    }
+ if(e.keyCode==13){
+     document.getElementById("button").click()
+ }
     if (e.keyCode == 8) {
         e.target.value = ""
         e.target.previousElementSibling.focus()
         e.preventDefault()
-
-
+        return
     }
 
+   if(e.target.maxLength==e.target.value.length){
+        e.target.nextElementSibling.focus()
+    }
 }
 
 export function setTry(tryCount) {
@@ -25,6 +24,7 @@ export function setTry(tryCount) {
     Array.from(currentRow.children).map(child => {
         child.disabled = false
     })
+    currentRow.children[0].focus()
 
     if (tryCount != 1) {
 

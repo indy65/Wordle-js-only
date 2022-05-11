@@ -4,3 +4,12 @@ min-height: 60px;
 text-align: center;
 text-transform: uppercase;
 }
+.keyboard{
+    padding-top: 5rem;
+}
+.keyboardLetter{
+   text-align: center;
+    height: 5rem;
+    border: solid black;
+    border-radius: 10%;
+}

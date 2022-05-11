@@ -13,3 +13,9 @@ text-transform: uppercase;
     border: solid black;
     border-radius: 10%;
 }
+#gameOver{
+    position: absolute;
+    top: 0;
+    display: none;
+    
+}
